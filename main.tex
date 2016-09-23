@@ -1,0 +1,152 @@
+    %Document type
+\documentclass[12pt, a4paper]{report} %options include: article (use for small reports and essays, report (use for thesis), book (maybe better for thesis?), slides (lul wut)
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm, bindingoffset=6mm]{geometry}
+\usepackage{titlesec}    
+\titleformat{\chapter}[display]
+{\normalfont%
+    \huge% %change this size to your needs for the first line
+    \bfseries}{\chaptertitlename\ \thechapter}{10pt}{%
+    \Large %change this size to your needs for the second line
+    }
+\usepackage{lipsum}%Just for testing structure, isn't needed for final work
+    %header/footer
+\usepackage{fancyhdr}%headers and footers package
+%\pagestyle{fancy}
+\pagestyle{plain}
+\lhead{MRes Biology}%left header
+%\chead{}%centre header
+\rhead{Bloggs, J. 2016}%right header
+%\lfoot{}%left footer, etc etc
+%\cfoot{}
+%\rfoot{}
+\renewcommand{\headrulewidth}{0.4pt}%line thickness for header
+\renewcommand{\footrulewidth}{0.0pt}%as above, for footer
+
+\usepackage[utf8]{inputenc}%language package, must be on
+\usepackage{amsmath}%maths package, keep on for greek letters, numbers stuff.
+\usepackage{textcomp} %For typing the degrees symbol. "\textdegree C"
+\usepackage[]{natbib}%referencing package (DO NOT FUCK THIS)
+\usepackage{setspace}%linespacing
+\doublespacing  %1.5 line spacing is a safe bet, I'd stick with it 
+\usepackage{graphicx}%allows images to be inserted
+\graphicspath{ {images/} }%directory where image files are kept for the compiler
+\usepackage{seqsplit}%For Fasta sequences or something like that- use \seqsplit{sequencehere}
+%\usepackage[none]{hyphenat}%Prevents words being split across lines. Optional
+    
+\usepackage{hyperref}%Makes contents page lines and citations in text clickable links
+\hypersetup{
+    colorlinks=true,
+    citecolor=blue,%citation colour
+    filecolor=black,
+    linkcolor=black,%contents page colour
+    urlcolor=black
+}
+
+\usepackage{afterpage}
+    %Document particulars
+\title{Insert title here}
+\author{Ryan Buttery}
+\date{Insert date here}
+
+\fancypagestyle{plain}{%
+    \lhead{MRes Biology}
+    \rhead{Buttery, R.D. 2016}
+    \fancyfoot[C]{\thepage}%
+\renewcommand{\headrulewidth}{0.4pt}% Line at the header invisible
+\renewcommand{\footrulewidth}{0.0pt}% Line at the footer visible
+}
+\begin{document}
+    %Don't mess with these!
+\bibliographystyle{apa} %seems to be the closest to what I normally do. Need to experiment with books still though. Probably fine!
+\setcitestyle{round} %makes the brackets on citations round like (this)
+\renewcommand{\bibname}{References}
+
+%Which levels of section are shown in contents (0=chapter, 1=section, 2=subsection, etc)
+\setcounter{tocdepth}{3}
+%Which levels should be numbered. Chapter 1, section 1.1, etc
+\setcounter{secnumdepth}{0}
+\renewcommand{\familydefault}{\rmdefault}
+
+
+%%%UNCOMMENT THE FOLLOWING LINES AS THEY ARE COMPLETED AND/OR REQUIRED
+
+\pagenumbering{gobble}%Hides page number on verso (back) of cover page
+\input{prefaces/title}
+\newgeometry{a4paper,width=150mm,top=25mm,bottom=25mm,bindingoffset=-6mm, twoside}%This is setup for binding already, comment out if making a PDF version for electronic submission
+\afterpage{\null\newpage}
+
+\chapter*{Abstract}
+\pagenumbering{roman}%Makes prefaces have roman numerals
+\input{prefaces/abstract}
+\addcontentsline{toc}{chapter}{Abstract}%adds un-numbered chapter to contents page
+\setcounter{page}{1}%Tells it to start counting numbers from here
+
+
+\addcontentsline{toc}{chapter}{Prefaces}
+
+\chapter*{Dedication}
+\addcontentsline{toc}{section}{Dedication}
+\input{prefaces/dedication}
+
+
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+\input{prefaces/acknowledgements}
+
+\newpage
+\addcontentsline{toc}{section}{Table of Contents}
+\tableofcontents
+
+\listoffigures
+\addcontentsline{toc}{section}{Figures}
+
+\listoftables
+\addcontentsline{toc}{section}{Tables}
+
+\chapter*{Table of Abbreviations}
+\input{prefaces/abbreviations}
+\pagestyle{fancy}
+
+
+\chapter{Introduction}
+\pagenumbering{arabic}%Makes page numbers normal
+\input{chapters/introduction}
+
+\chapter{Title}%Chapter 2 title here
+\input{chapters/chapter2}
+
+\chapter{Title}%Chapter 3 title here
+\input{chapters/chapter3}
+
+\chapter{Discussion of findings}
+\input{chapters/discussion}
+
+\chapter{Conclusions}
+\input{chapters/conclusion}
+
+%%%BIBTEX REFERENCING%%%
+\pagestyle{plain}
+\newpage
+\addcontentsline{toc}{chapter}{References}
+\bibliography{references.bib} %make sure to keep references in a file called "references.bib"
+
+
+\newpage
+\appendix
+\input{chapters/appendix}
+
+
+\end{document}
+%useful instructions
+
+%CITING AND REFERENCING
+%to cite: \citep{} for bracketed, \citet{} for no brackets, \citep{1,2,...) for multiple
+%Don't forget to give your references in references.bib a suitable codename before trying to cite them like a spanner!
+%See http://ctan.org/pkg/natbib for citation help!
+
+%MISC
+%Detexify is a beautiful thing for symbols! http://detexify.kirelabs.org/classify.html
+%When using greek letters, like in microliters, do it like this: 1.5$\mu$l
+%MAKE TABLES WITH THIS http://www.tablesgenerator.com/
